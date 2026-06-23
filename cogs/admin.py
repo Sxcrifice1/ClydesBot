@@ -432,5 +432,49 @@ class Admin(commands.Cog):
 
 
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def setup_guia_publico(self, ctx):
+        if ctx.channel.id != MOD_LOG_ID:
+            return await ctx.send("❌ Comando restrito ao canal de Logs da Moderação.", delete_after=5)
+
+        guia_channel = ctx.guild.get_channel(1374208274668195853)
+        if not guia_channel:
+            return await ctx.send("❌ Canal de comandos público (1374208274668195853) não encontrado.")
+        
+        await guia_channel.purge(limit=50)
+
+        header = discord.Embed(
+            title="📚 Cola de Comandos — Clydes",
+            description="Aqui estão os comandos públicos que você pode usar no servidor!",
+            color=0x2b2d31
+        )
+        await guia_channel.send(embed=header)
+
+        e_audio = discord.Embed(title="🎵 Comandos de Áudio", color=0x3498db)
+        e_audio.add_field(name="🔓 !play_radio <url>", value="Toca uma rádio ao vivo do YouTube.", inline=False)
+        e_audio.add_field(name="🔓 !stop_radio", value="Para a rádio e desconecta o bot.", inline=False)
+        e_audio.add_field(name="🔓 !dl_audio <url>", value="Baixa o áudio de um vídeo do YouTube.", inline=False)
+        e_audio.add_field(name="🔓 !dl_video <url>", value="Baixa o vídeo em MP4 do YouTube.", inline=False)
+        e_audio.add_field(name="🔓 !info_audio", value="Analisa BPM e Tom de um arquivo anexado.", inline=False)
+        await guia_channel.send(embed=e_audio)
+
+        e_ia = discord.Embed(title="🤖 Comandos de Inteligência Artificial", color=0x9b59b6)
+        e_ia.add_field(name="🔓 !nome_beat <vibe>", value="A IA gera 5 nomes comerciais para sua track/beat.", inline=False)
+        e_ia.add_field(name="🔓 !analise_capa", value="Anexe uma imagem para análise técnica de design.", inline=False)
+        e_ia.add_field(name="🔓 !ideia", value="A IA gera um desafio criativo aleatório para música ou vídeo.", inline=False)
+        e_ia.add_field(name="🔓 !format <título>", value="Anexe um arquivo para postar de forma formatada.", inline=False)
+        await guia_channel.send(embed=e_ia)
+
+        e_xp = discord.Embed(title="🌟 Engajamento e Utilidades", color=0xf1c40f)
+        e_xp.add_field(name="🔓 !rank / !leaderboard", value="Vê seu nível de XP atual ou o top 10 do servidor.", inline=False)
+        e_xp.add_field(name="🔓 !sugestao <texto>", value="Cria uma sugestão no canal de sugestões.", inline=False)
+        e_xp.add_field(name="🔓 !poll <perg | op1 | op2>", value="Cria uma enquete com reações numeradas.", inline=False)
+        e_xp.add_field(name="🔓 !userinfo / !serverinfo", value="Mostra informações do usuário ou do servidor.", inline=False)
+        e_xp.add_field(name="🔓 !avatar @user", value="Mostra a foto de perfil em alta resolução.", inline=False)
+        await guia_channel.send(embed=e_xp)
+
+        await ctx.send("✅ Guia de comandos público atualizado no canal <#1374208274668195853>!")
+
 async def setup(bot):
     await bot.add_cog(Admin(bot))

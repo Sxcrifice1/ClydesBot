@@ -66,6 +66,7 @@ class Downloads(commands.Cog):
             'outtmpl': 'downloads/%(title)s.%(ext)s',
             'quiet': True,
             'no_warnings': True,
+            'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
             'cookiefile': 'cookies.txt',  # Se precisar
         }
         
@@ -100,6 +101,7 @@ class Downloads(commands.Cog):
             'format': 'best[ext=mp4][filesize<25M]/best[filesize<25M]',
             'outtmpl': 'downloads/%(title)s.%(ext)s',
             'quiet': True,
+            'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
         }
         
         try:
