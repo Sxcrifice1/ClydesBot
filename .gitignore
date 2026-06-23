@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+node_modules/
+user_keys.json
+xp_data.json
+*.zip
+ffmpeg/
