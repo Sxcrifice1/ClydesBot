@@ -1,11 +1,13 @@
 import discord
 from discord.ext import commands
-from config import MOD_LOG_ID, CANAL_BEM_VINDO_ID, CANAL_SELF_ROLES_ID, CANAL_BOOSTS_ID, CANAL_SHOW_EVENTS_ID, COMMUNITY_CATEGORY_ID
+from config import MOD_LOG_ID, ADMIN_CATEGORY_ID, CANAL_BEM_VINDO_ID, CANAL_SELF_ROLES_ID, CANAL_BOOSTS_ID, CANAL_SHOW_EVENTS_ID, COMMUNITY_CATEGORY_ID
 
 class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
     async def setup_admin_canais(self, ctx):
         categoria = discord.utils.get(ctx.guild.categories, id=ADMIN_CATEGORY_ID)
         if not categoria:
@@ -266,6 +268,8 @@ class Admin(commands.Cog):
         await ctx.send(f"✅ Canais e Guias atualizados com sucesso em **{categoria.name}**!")
 
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
     async def painel_ia(self, ctx):
         if ctx.channel.id != MOD_LOG_ID: return
         await ctx.message.delete()
@@ -330,6 +334,8 @@ class Admin(commands.Cog):
         await ctx.send(embed=embed, view=RolesView())
 
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
     async def travar_canais(self, ctx):
         if ctx.channel.id != MOD_LOG_ID: return
         canais_id = [CANAL_BEM_VINDO_ID, CANAL_SELF_ROLES_ID, CANAL_BOOSTS_ID, CANAL_SHOW_EVENTS_ID]
@@ -349,6 +355,8 @@ class Admin(commands.Cog):
         await ctx.send(f"🔒 {sucesso} canais travados.")
 
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
     async def regras(self, ctx):
         if ctx.channel.id != MOD_LOG_ID: return
         await ctx.message.delete()
@@ -358,6 +366,8 @@ class Admin(commands.Cog):
             await canal.send(embed=embed)
 
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
     async def criar_cargos(self, ctx):
         if ctx.channel.id != MOD_LOG_ID: return
         cargos = ["FL Studio", "Ableton Live", "Pro Tools", "Photoshop", "Premiere Pro", "After Effects", "Produtor Musical", "Beatmaker", "Cantor/Vocalista", "Editor de Vídeo", "Designer", "Músico"]
@@ -367,6 +377,8 @@ class Admin(commands.Cog):
         await ctx.send("✅ Cargos criados.")
 
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
     async def setup_comunidade(self, ctx):
         if ctx.channel.id != MOD_LOG_ID: return
         category = discord.utils.get(ctx.guild.categories, id=COMMUNITY_CATEGORY_ID)
@@ -385,6 +397,8 @@ class Admin(commands.Cog):
         await ctx.send("✅ Canais de comunidade (portfolios, collabs, lofi-radio) criados/verificados com sucesso!")
 
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
     async def painel_collabs(self, ctx):
         if ctx.channel.id != MOD_LOG_ID: return
         canal_collab = discord.utils.find(lambda c: "collabs" in c.name.lower(), ctx.guild.text_channels)
@@ -408,6 +422,8 @@ class Admin(commands.Cog):
         await ctx.send("✅ Painel de Collabs atualizado em #collabs.")
 
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
     async def painel_portfolios(self, ctx):
         if ctx.channel.id != MOD_LOG_ID: return
         canal_portfolios = discord.utils.find(lambda c: "portfolios" in c.name.lower(), ctx.guild.text_channels)
