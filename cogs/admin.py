@@ -252,6 +252,8 @@ class Admin(commands.Cog):
         e_util.add_field(name="🔓 !avatar @user", value="Mostra a foto de perfil em alta resolução.", inline=False)
         e_util.add_field(name="⭐ Starboard (Automático)", value="Mensagens que receberem 3 reações de ⭐ vão para o canal #destaques.", inline=False)
         await guia_channel.send(embed=e_util)
+        
+        await ctx.send("✅ Manuais atualizados com sucesso no canal <#1519066501502603455>!")
             
         banco_channel = discord.utils.get(ctx.guild.text_channels, name="banco-de-vozes")
         if not banco_channel:

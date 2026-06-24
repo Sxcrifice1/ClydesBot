@@ -102,6 +102,7 @@ class Downloads(commands.Cog):
             'outtmpl': 'downloads/%(title)s.%(ext)s',
             'quiet': True,
             'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
+            'cookiefile': 'cookies.txt',
         }
         
         try:
